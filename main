@@ -1,0 +1,70 @@
+# your code goes here
+import re
+class stack(object):
+	#top = -1
+	#stack  = []
+
+	#Now the initialize function to start a new stack
+	def __init__(self, lst):
+		self.top =  -1
+		self.stack = []
+		self.push(lst)
+		"""for item in lst:
+			self.stack.append(item)
+			self.top += 1"""
+	#Push Function for the stack
+	def push(self,item):
+		if type(item) == list:
+			for rec in item:
+				self.stack.append(rec)
+				self.top += 1
+		else:
+			self.stack.append(item)
+			self.top += 1
+		#print "Item Pushed Successfully"
+	#Pop Function for the stack
+	def pop(self):
+		rec = 0
+		rec = self.stack[self.top]
+		del self.stack[self.top]
+		self.top -= 1
+		return rec
+	#Function to print the stack
+	def prnt(self):
+		for i in range(self.top,-1,-1):
+			print self.stack[i]
+	#Function to return the top
+	def get_top(self):
+		return self.top
+	def length(self):
+		return self.top + 1
+		
+def infix_to_postfix(expr):
+	operand = stack([])
+	operator = stack([])
+	result = stack([])
+	p_fix = ''
+	for letter in expr:
+		if re.search('[a-z]',letter) is not None:
+			operand.push(letter)
+		if letter == '+' or letter == '-' or letter == '/' or letter == '*' or letter == '^':
+			operator.push(letter)
+		if letter == ')':
+			operand.push(operator.pop())
+	for i in range(0, operand.length()):
+		result.push(operand.pop())
+	for i in range(0, result.length()):
+		p_fix = p_fix + result.pop()
+	print p_fix
+	
+def main():
+	count = int(raw_input())
+	expr_list = []
+
+	for i in range(1, count+1):
+		expr_list.append(raw_input())
+		i += 1
+	for expr in expr_list:
+		infix_to_postfix(expr)
+		
+main()
