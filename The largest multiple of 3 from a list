@@ -1,34 +1,44 @@
 def multiple_3(queue):
-        que_rem_1 = deque() //queue to hold the numbers with remainder 1
-        que_rem_2 = deque()//queue to hold the numbers with remainder 2
+        que_rem_1 = deque()
+        que_rem_2 = deque()
         length = len(queue)
         count = length - 1
         counter = count
-        if sum(queue) % 3 == 0:
+	if sum(queue) % 3 == 0:
 		return queue
 
+
         while count >= 0:
-                print queue[counter]
-                if queue[counter] % 3 == 2:
+		print queue[counter]
+
+		if queue[counter] % 3 == 2:
 			que_rem_2.appendleft(queue.pop())
 			counter -= 1
-                elif queue[counter] % 3 == 1:
-                        que_rem_1.appendleft(queue.pop())
-                        counter -= 1
-                else:
-                        queue.rotate(1)
-                count -= 1
+		elif queue[counter] % 3 == 1:
+			que_rem_1.appendleft(queue.pop())
+			counter -= 1
+		else:
+			queue.rotate(1)
+		count -= 1
 
 
-        len1 = len(que_rem_1)
+
         len2 = len(que_rem_2)
-        count = min(len1,len2)
-
-        for i in range(count):
-        //pull out the numbers with remainder 1 and 2 simutaneously
-                queue.appendleft(que_rem_1.pop())
-
-                queue.appendleft(que_rem_2.pop())
+        #count = min(len1,len2)
+	print len2
+	#print len1
+	print que_rem_1
+	print que_rem_2
+        for i in range(len2):
+		print len2
+		if len(que_rem_1) > 0:
+			queue.appendleft(que_rem_2.pop())
+                len1 = len(que_rem_1)
+                print len1
+                for que1 in range(0,len(que_rem_1),2):
+			print "len : " + str(len(que_rem_1))
+			for count in range(que1+1):
+				queue.appendleft(que_rem_1.pop())
 
         return queue
         
