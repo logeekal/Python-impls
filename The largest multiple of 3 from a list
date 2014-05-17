@@ -1,0 +1,47 @@
+def multiple_3(queue):
+        que_rem_1 = deque() //queue to hold the numbers with remainder 1
+        que_rem_2 = deque()//queue to hold the numbers with remainder 2
+        length = len(queue)
+        count = length - 1
+        counter = count
+        if sum(queue) % 3 == 0:
+		return queue
+
+        while count >= 0:
+                print queue[counter]
+                if queue[counter] % 3 == 2:
+			que_rem_2.appendleft(queue.pop())
+			counter -= 1
+                elif queue[counter] % 3 == 1:
+                        que_rem_1.appendleft(queue.pop())
+                        counter -= 1
+                else:
+                        queue.rotate(1)
+                count -= 1
+
+
+        len1 = len(que_rem_1)
+        len2 = len(que_rem_2)
+        count = min(len1,len2)
+
+        for i in range(count):
+        //pull out the numbers with remainder 1 and 2 simutaneously
+                queue.appendleft(que_rem_1.pop())
+
+                queue.appendleft(que_rem_2.pop())
+
+        return queue
+        
+        
+def main(lst):
+	res = []
+	lst.sort()
+	queue = deque(lst)
+	result = multiple_3(queue)
+	print result
+	for i in result:
+		res.append(i)
+	res.sort()
+	print res[::-1]
+	
+main()
