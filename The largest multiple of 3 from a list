@@ -1,46 +1,18 @@
-def multiple_3(queue):
-        que_rem_1 = deque()
-        que_rem_2 = deque()
-        length = len(queue)
-        count = length - 1
-        counter = count
-	if sum(queue) % 3 == 0:
-		return queue
-
-
-        while count >= 0:
-		print queue[counter]
-
-		if queue[counter] % 3 == 2:
-			que_rem_2.appendleft(queue.pop())
-			counter -= 1
-		elif queue[counter] % 3 == 1:
-			que_rem_1.appendleft(queue.pop())
-			counter -= 1
+def multiple_of_3(queue):
+	total_sum = 0
+	for count in range(len(queue)):
+		if not queue[count] % 3 == 0:
+			total_sum += queue[count]
+	rem =  total_sum % 3
+	for count in range(len(queue) - 1,-1,-1):
+		print rem
+		print queue[len(queue)-1]
+		if queue[len(queue)-1] % 3 == rem:
+			queue.pop()
+			break
 		else:
 			queue.rotate(1)
-		count -= 1
-
-
-
-        len2 = len(que_rem_2)
-        #count = min(len1,len2)
-	print len2
-	#print len1
-	print que_rem_1
-	print que_rem_2
-        for i in range(len2):
-		print len2
-		if len(que_rem_1) > 0:
-			queue.appendleft(que_rem_2.pop())
-                len1 = len(que_rem_1)
-                print len1
-                for que1 in range(0,len(que_rem_1),2):
-			print "len : " + str(len(que_rem_1))
-			for count in range(que1+1):
-				queue.appendleft(que_rem_1.pop())
-
-        return queue
+	return queue
         
         
 def main(lst):
@@ -54,4 +26,4 @@ def main(lst):
 	res.sort()
 	print res[::-1]
 	
-main()
+main([3,6,2,5,5,8,2,7,1,7,4,1,7])
