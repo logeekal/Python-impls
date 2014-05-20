@@ -1,0 +1,55 @@
+class LinkedListNode(object):
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+
+
+class LinkedList(object):
+
+	def __init__(self):
+		self.first = LinkedListNode(None)
+		self.last = self.first
+		self.size = 0
+	#Add any Element at a given position(None for the addition of new Node at the end)
+	def add(self,data,pos=None):
+		new_node = node(data)
+		if pos is None:
+			if self.size == 0:
+				self.first.data = data
+			else:
+
+				self.last.next = new_node
+				self.last = new_node
+		else:
+			current_node = self.first
+			if pos == 1:
+				new_node.next = self.first
+				self.first = new_node
+			else:
+				for index in range(1,pos - 1):
+					current_node = current_node.next
+				new_node.next = current_node.next
+				current_node.next = new_node
+
+		self.size += 1
+	#get Data on a particular index
+	def getdata(self,index):
+		if index > self.size :
+			raise IndexError("Index cannot be greater than the maximum size : " + str(self.getSize()))
+		current_node = self.first
+		for indx in range(index - 1):
+			current_node = current_node.next
+		print current_node.data
+	#Add multiple item by a list or tuple
+	def addAll(self,lst):
+		for item in lst:
+			self.add(item)
+	#Get the size of linkedList
+	def getSize(self):
+		return self.size
+	#Print all the elements of LinkedList
+	def prnt(self):
+		current_node = self.first
+		for i in range(self.size):
+			print current_node.data ,
+			current_node = current_node.next
