@@ -1,0 +1,24 @@
+# your code goes here
+ 
+def quick_sort(lst):
+	base =  lst[0];
+	less = []
+	equal = [] 
+	more = [] 
+	for i in range(len(lst)):
+		if lst[i] > base:
+			more.append(lst[i])
+		elif lst[i] < base:
+			less.append(lst[i])
+		else:
+			equal.append(lst[i])
+ 
+	if len(more) > 1 :
+		more = quick_sort(more)
+	if len(less) > 1 :
+		less= quick_sort(less)
+ 
+ 
+	return less + equal + more
+ 
+print quick_sort([11,1,52,4,5,5,6,43,100,0,7])

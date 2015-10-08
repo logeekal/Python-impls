@@ -1,0 +1,16 @@
+import time
+def bubble_sort_git(lst):
+	temp = 0
+	l = len(lst)
+	print 'Start Time : ' + str(time.time())
+	for i in range(l):
+		for count in range(l - 1 - i):
+			if lst[count] < lst[count + 1]:
+				temp = lst[count]
+				lst[count] = lst[count + 1]
+				lst[count + 1 ] =  temp
+			else:
+				continue
+	print 'Sorting Done : ' + str(time.time())
+	res = sorted(lst)
+	print 'Stock Sorting Done : ' + str(time.time())

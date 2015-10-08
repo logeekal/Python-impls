@@ -1,0 +1,46 @@
+# your code goes here
+def check_palin(num):
+	num_str= []
+	for i in str(num):
+		num_str.append(i)
+	result = num_str
+	mid = int(len(num_str)/2)
+	buff = 0
+	#Start traversing the list from end and beginning
+	i = 0
+	j = len(num_str) - 1 - i
+	while i < j: #Go to the middle of the string
+		if not (int(num_str[i]) == int(num_str[j])):
+			#print "Condition True"
+			if num_str[j] < num_str[i]:
+				num_str[j] = num_str[i]
+			else:
+				num_str[j] = num_str[i]
+				k = j
+
+				while int(num_str[k-1]) + 1 >= 10:
+					num_str[k-1] = str(int(num_str[k-1]) + 1 - 10)
+					#print num_str
+					k -= 1
+				num_str[k-1] = 	str(int(num_str[k-1]) + 1)
+				i -= 1
+				j = j + 1 #Traversal should start again from original position of i and j and they should not incemented in further steps
+				          #For explaination check examples like 2993 or 329933 
+		i += 1
+		j -= 1
+	print ''.join(num_str)
+	
+
+def main():
+	#Get the number of test cases
+	t = int(raw_input())
+	nums = []
+	#Store the input in a list
+	for i in range(0,t):
+		nums.append(raw_input())
+	#Go through the test cases and find the nearest palindromes
+	for num in nums:
+		check_palin(num)
+
+main()
+
